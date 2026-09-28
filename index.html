@@ -1,0 +1,2203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PENALTY//COMPARE</title>
+
+    <style>
+
+    .search-container {
+    position: relative;
+}
+
+.search {
+    width: 265px;
+    height: 38px;
+
+    border: 2px solid var(--black);
+    background: white;
+
+    padding: 8px 12px;
+
+    font-family: inherit;
+    font-size: 12px;
+
+    color: var(--black);
+}
+
+.search:focus {
+    outline: none;
+    box-shadow: 4px 4px 0 var(--black);
+}
+
+.search-results {
+    position: absolute;
+
+    top: 43px;
+    right: 0;
+
+    width: 265px;
+
+    background: var(--cream);
+
+    border: 2px solid var(--black);
+
+    box-shadow: 4px 4px 0 var(--black);
+
+    z-index: 1000;
+
+    display: none;
+}
+
+.search-result {
+    padding: 10px 12px;
+
+    border-bottom: 1px solid var(--black);
+
+    font-size: 11px;
+
+    cursor: pointer;
+}
+
+.search-result:last-child {
+    border-bottom: none;
+}
+
+.search-result:hover {
+    background: var(--yellow);
+}
+
+.search-type {
+    display: block;
+
+    font-size: 8px;
+
+    margin-top: 3px;
+
+    opacity: 0.6;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --cream: #fff7e4;
+    --mint: #a9d8bd;
+    --yellow: #ffc928;
+    --pink: #e9a8d0;
+    --black: #111111;
+    --white: #ffffff;
+    --gray: #555555;
+}
+
+/* =========================
+   BODY
+========================= */
+
+body {
+    min-height: 100vh;
+    font-family: "Courier New", monospace;
+    color: var(--black);
+
+    background:
+        linear-gradient(
+            120deg,
+            #59bdf0 0%,
+            #59bdf0 30%,
+            #f6d7ad 30%,
+            #f6d7ad 55%,
+            #ff9d78 55%,
+            #ff9d78 75%,
+            #f3a8c5 75%
+        );
+
+    padding: 45px;
+}
+
+
+/* =========================
+   MAIN DASHBOARD
+========================= */
+
+.dashboard {
+    max-width: 1250px;
+    min-height: 720px;
+    margin: auto;
+
+    display: grid;
+    grid-template-columns: 210px 1fr;
+
+    background: var(--mint);
+
+    border: 2px solid var(--black);
+
+    box-shadow:
+        8px 8px 0 var(--black);
+}
+
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar {
+    border-right: 2px solid var(--black);
+    padding: 25px 15px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: bold;
+
+    padding: 0 10px 25px;
+
+    border-bottom: 2px solid var(--black);
+}
+
+.logo span {
+    margin-right: 8px;
+}
+
+.nav {
+    margin-top: 25px;
+}
+
+.nav-item {
+    display: block;
+
+    color: var(--black);
+    text-decoration: none;
+
+    padding: 11px 12px;
+    margin-bottom: 5px;
+
+    font-size: 13px;
+
+    border: 1px solid transparent;
+}
+
+.nav-item:hover,
+.nav-item.active {
+    background: var(--black);
+    color: white;
+}
+
+.sidebar-bottom {
+    margin-top: auto;
+}
+
+
+/* =========================
+   MAIN CONTENT
+========================= */
+
+.main-panel {
+    background: var(--cream);
+    padding: 20px;
+}
+
+
+/* =========================
+   TOP BAR
+========================= */
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 25px;
+}
+
+.back-btn {
+    width: 35px;
+    height: 30px;
+
+    border: 2px solid var(--black);
+    background: var(--cream);
+
+    cursor: pointer;
+}
+
+.search {
+    width: 230px;
+
+    border: 2px solid var(--black);
+    background: white;
+
+    padding: 8px 12px;
+
+    font-family: inherit;
+    font-size: 12px;
+}
+
+
+/* =========================
+   TITLE
+========================= */
+
+.page-title {
+    font-size: 34px;
+    margin-bottom: 5px;
+
+    letter-spacing: -1px;
+}
+
+.page-subtitle {
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+
+
+/* =========================
+   DASHBOARD GRID
+========================= */
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+
+    gap: 15px;
+
+    align-items: start;
+}
+
+
+/* =========================
+   CASE CARD
+========================= */
+
+.case-card {
+    background: var(--yellow);
+
+    border: 2px solid var(--black);
+
+    padding: 15px;
+
+    box-shadow: 5px 5px 0 var(--black);
+}
+
+.card-title {
+    font-size: 22px;
+    font-weight: bold;
+
+    margin-bottom: 15px;
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+.form-grid {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+}
+
+.field.full {
+    grid-column: 1 / -1;
+}
+
+.field label {
+    font-size: 11px;
+    font-weight: bold;
+
+    margin-bottom: 5px;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+
+    border: 2px solid var(--black);
+
+    background: var(--cream);
+
+    padding: 10px;
+
+    font-family: inherit;
+    font-size: 13px;
+
+    color: var(--black);
+
+    outline: none;
+}
+
+textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    box-shadow: 3px 3px 0 var(--black);
+}
+
+
+/* =========================
+   CIRCUMSTANCES
+========================= */
+
+.circumstances {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 6px;
+}
+
+.check {
+    background: var(--cream);
+
+    border: 2px solid var(--black);
+
+    padding: 8px;
+
+    font-size: 11px;
+
+    cursor: pointer;
+}
+
+.check:hover {
+    background: white;
+}
+
+.check input {
+    width: auto;
+    margin-right: 5px;
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+.button-area {
+    margin-top: 15px;
+}
+
+button {
+    background: var(--black);
+    color: white;
+
+    border: 2px solid var(--black);
+
+    padding: 12px 20px;
+
+    font-family: inherit;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+button:hover {
+    background: white;
+    color: var(--black);
+}
+
+
+/* =========================
+   SIDE INFORMATION
+========================= */
+
+.side-card {
+    background: var(--cream);
+
+    border: 2px solid var(--black);
+
+    padding: 15px;
+
+    box-shadow: 5px 5px 0 var(--black);
+}
+
+.side-card h2 {
+    font-size: 20px;
+    margin-bottom: 12px;
+}
+
+
+/* =========================
+   STAT CARDS
+========================= */
+
+.stats {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 7px;
+
+    margin-bottom: 15px;
+}
+
+.stat {
+    border: 2px solid var(--black);
+
+    background: white;
+
+    padding: 10px;
+}
+
+.stat-number {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.stat-label {
+    font-size: 9px;
+}
+
+
+/* =========================
+   LEGAL SOURCES
+========================= */
+
+.source-list {
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+.source-item {
+    border: 2px solid var(--black);
+
+    padding: 10px;
+
+    background: white;
+}
+
+.source-item span {
+    display: block;
+
+    font-size: 9px;
+
+    margin-bottom: 4px;
+}
+
+.source-item a {
+    color: var(--black);
+
+    font-size: 11px;
+    font-weight: bold;
+
+    text-decoration: none;
+}
+
+.source-item a:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================
+   STATUS
+========================= */
+
+.status {
+    margin-top: 15px;
+
+    padding: 10px;
+
+    border: 2px solid var(--black);
+
+    background: var(--pink);
+
+    font-size: 11px;
+}
+
+
+/* =========================
+   RESULTS
+========================= */
+
+#results {
+    display: none;
+
+    margin-top: 25px;
+}
+
+.result-header {
+    background: var(--pink);
+
+    border: 2px solid var(--black);
+
+    padding: 14px;
+
+    margin-bottom: 15px;
+
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.result-header span {
+    font-weight: normal;
+}
+
+
+/* =========================
+   COUNTRY CARDS
+========================= */
+
+.countries {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 10px;
+
+    border: none;
+}
+
+.country {
+    background: white;
+
+    border: 2px solid var(--black);
+
+    box-shadow: 4px 4px 0 var(--black);
+}
+
+.country-name {
+    background: var(--yellow);
+
+    padding: 12px;
+
+    border-bottom: 2px solid var(--black);
+
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.country-content {
+    padding: 12px;
+}
+
+.info {
+    margin-bottom: 14px;
+}
+
+.info-title {
+    font-size: 9px;
+    font-weight: bold;
+
+    margin-bottom: 4px;
+}
+
+.info-value {
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+
+/* =========================
+   ANALYSIS
+========================= */
+
+.ai-analysis {
+    margin-top: 15px;
+
+    border: 2px solid var(--black);
+
+    background: var(--cream);
+}
+
+.analysis-title {
+    background: var(--black);
+    color: white;
+
+    padding: 10px;
+
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.analysis-content {
+    padding: 15px;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+
+    white-space: pre-line;
+}
+
+
+/* =========================
+   DISCLAIMER
+========================= */
+
+.disclaimer {
+    margin-top: 15px;
+
+    padding: 12px;
+
+    border: 2px solid var(--black);
+
+    background: #fff;
+
+    font-size: 10px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    margin-top: 20px;
+
+    text-align: center;
+
+    font-size: 9px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width: 900px) {
+
+    body {
+        padding: 15px;
+    }
+
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        border-right: none;
+        border-bottom: 2px solid var(--black);
+    }
+
+    .nav {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .nav-item {
+        margin-right: 5px;
+    }
+
+    .sidebar-bottom {
+        display: none;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .countries {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media(max-width: 600px) {
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .field.full {
+        grid-column: auto;
+    }
+
+    .circumstances {
+        grid-template-columns: 1fr;
+    }
+
+    .page-title {
+        font-size: 25px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <span>▣</span>
+            PENALTY
+        </div>
+
+        <nav class="nav">
+
+            <a href="#" class="nav-item active">
+                ⌂ &nbsp; Home
+            </a>
+
+            <a href="#compare" class="nav-item">
+                ▣ &nbsp; Compare
+            </a>
+
+            <a href="#results" class="nav-item">
+                ◉ &nbsp; Results
+            </a>
+
+            <a href="#sources" class="nav-item">
+                ★ &nbsp; Legal Sources
+            </a>
+
+            <a href="#" class="nav-item">
+                ⚙ &nbsp; Preferences
+            </a>
+
+        </nav>
+
+        
+
+    </aside>
+
+
+    <!-- ================= MAIN PANEL ================= -->
+
+    <main class="main-panel">
+
+        <!-- TOP BAR -->
+
+        <div class="topbar">
+
+            <button class="back-btn"
+                    onclick="history.back()">
+                ←
+            </button>
+
+            <div class="search-container">
+
+    <input
+        id="siteSearch"
+        class="search"
+        type="text"
+        placeholder="⌕ Search crime, country..."
+        autocomplete="off"
+    >
+
+    <div
+        id="searchResults"
+        class="search-results"
+    ></div>
+
+</div>
+
+        </div>
+
+
+        <!-- PAGE TITLE -->
+
+        <h1 class="page-title">
+            PENALTY//COMPARE
+        </h1>
+
+        <p class="page-subtitle">
+            AI CRIMINAL LAW COMPARISON SYSTEM
+        </p>
+
+
+        <!-- ================= TOP DASHBOARD ================= -->
+
+        <div class="dashboard-grid"
+             id="compare">
+
+
+            <!-- ================= CASE INFORMATION ================= -->
+
+            <section class="case-card">
+
+                <div class="card-title">
+                    Case information
+                </div>
+
+
+                <div class="form-grid">
+
+
+                    <!-- CRIME -->
+
+                    <div class="field">
+
+                        <label>
+                            CRIME / OFFENCE
+                        </label>
+
+                        <select id="crime">
+
+                            <option value="theft">
+                                Theft
+                            </option>
+
+                            <option value="assault">
+                                Assault
+                            </option>
+
+                            <option value="fraud">
+                                Fraud
+                            </option>
+
+                            <option value="cybercrime">
+                                Cybercrime
+                            </option>
+
+                            <option value="robbery">
+                                Robbery
+                            </option>
+
+                            <option value="burglary">
+                                Burglary
+                            </option>
+
+                            <option value="drug_offence">
+                                Drug Offence
+                            </option>
+
+                            <option value="vandalism">
+                                Vandalism
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- COUNTRY 1 -->
+
+                    <div class="field">
+
+                        <label>
+                            COUNTRY 1
+                        </label>
+
+                        <select id="country1">
+
+                            <option value="india">
+                                India
+                            </option>
+
+                            <option value="usa">
+                                United States
+                            </option>
+
+                            <option value="uk">
+                                United Kingdom
+                            </option>
+
+                            <option value="japan">
+                                Japan
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- COUNTRY 2 -->
+
+                    <div class="field">
+
+                        <label>
+                            COUNTRY 2
+                        </label>
+
+                        <select id="country2">
+
+                            <option value="usa">
+                                United States
+                            </option>
+
+                            <option value="india">
+                                India
+                            </option>
+
+                            <option value="uk">
+                                United Kingdom
+                            </option>
+
+                            <option value="japan">
+                                Japan
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- COUNTRY 3 -->
+
+                    <div class="field">
+
+                        <label>
+                            COUNTRY 3
+                        </label>
+
+                        <select id="country3">
+
+                            <option value="japan">
+                                Japan
+                            </option>
+
+                            <option value="india">
+                                India
+                            </option>
+
+                            <option value="usa">
+                                United States
+                            </option>
+
+                            <option value="uk">
+                                United Kingdom
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- DETAILS -->
+
+                    <div class="field full">
+
+                        <label>
+                            ADDITIONAL CASE DETAILS
+                        </label>
+
+                        <textarea
+                            id="details"
+                            placeholder="First offence, approximate value, violence involved..."
+                        ></textarea>
+
+                    </div>
+
+
+                    <!-- CIRCUMSTANCES -->
+
+                    <div class="field full">
+
+                        <label>
+                            CASE CIRCUMSTANCES
+                        </label>
+
+                        <div class="circumstances">
+
+                            <label class="check">
+                                <input
+                                    type="checkbox"
+                                    value="First offence"
+                                >
+                                First offence
+                            </label>
+
+                            <label class="check">
+                                <input
+                                    type="checkbox"
+                                    value="Repeat offence"
+                                >
+                                Repeat offence
+                            </label>
+
+                            <label class="check">
+                                <input
+                                    type="checkbox"
+                                    value="Violence involved"
+                                >
+                                Violence involved
+                            </label>
+
+                            <label class="check">
+                                <input
+                                    type="checkbox"
+                                    value="Weapon involved"
+                                >
+                                Weapon involved
+                            </label>
+
+                            <label class="check">
+                                <input
+                                    type="checkbox"
+                                    value="Financial loss"
+                                >
+                                Financial loss
+                            </label>
+
+                            <label class="check">
+                                <input
+                                    type="checkbox"
+                                    value="Minor involved"
+                                >
+                                Minor involved
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- BUTTON -->
+
+                <div class="button-area">
+
+                    <button onclick="compareCrime()">
+                        RUN COMPARISON →
+                    </button>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ================= RIGHT SIDE ================= -->
+
+            <aside class="side-card">
+
+                <h2>
+                    Legal overview
+                </h2>
+
+
+                <div class="stats">
+
+                    <div class="stat">
+
+                        <div class="stat-number">
+                            3
+                        </div>
+
+                        <div class="stat-label">
+                            JURISDICTIONS
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat">
+
+                        <div class="stat-number">
+                            8
+                        </div>
+
+                        <div class="stat-label">
+                            OFFENCES
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat">
+
+                        <div class="stat-number">
+                            AI
+                        </div>
+
+                        <div class="stat-label">
+                            ANALYSIS
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat">
+
+                        <div class="stat-number">
+                            24/7
+                        </div>
+
+                        <div class="stat-label">
+                            ACCESS
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <h2>
+                    Legal sources
+                </h2>
+
+
+                <div
+                    class="source-list"
+                    id="sources"
+                >
+
+                    <div class="source-item">
+
+                        <span>INDIA</span>
+
+                        <a
+                            href="https://www.indiacode.nic.in/"
+                            target="_blank"
+                        >
+                            India Code →
+                        </a>
+
+                    </div>
+
+
+                    <div class="source-item">
+
+                        <span>UNITED KINGDOM</span>
+
+                        <a
+                            href="https://www.legislation.gov.uk/"
+                            target="_blank"
+                        >
+                            legislation.gov.uk →
+                        </a>
+
+                    </div>
+
+
+                    <div class="source-item">
+
+                        <span>JAPAN</span>
+
+                        <a
+                            href="https://www.japaneselawtranslation.go.jp/"
+                            target="_blank"
+                        >
+                            Japanese Law Translation →
+                        </a>
+
+                    </div>
+
+
+                    <div class="source-item">
+
+                        <span>UNITED STATES</span>
+
+                        <a
+                            href="https://www.justice.gov/"
+                            target="_blank"
+                        >
+                            U.S. Department of Justice →
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <div class="status">
+
+                    SYSTEM STATUS:
+                    <strong id="status">
+                        READY
+                    </strong>
+
+                </div>
+
+            </aside>
+
+        </div>
+
+
+
+        <!-- ================= RESULTS ================= -->
+
+        <section id="results">
+
+            <div class="result-header">
+
+                OFFENCE:
+                <span id="resultCrime"></span>
+
+            </div>
+
+
+            <div class="countries">
+
+
+                <!-- COUNTRY 1 -->
+
+                <div class="country">
+
+                    <div
+                        class="country-name"
+                        id="name1"
+                    >
+                        INDIA
+                    </div>
+
+                    <div class="country-content">
+
+                        <div class="info">
+
+                            <div class="info-title">
+                                APPLICABLE LAW
+                            </div>
+
+                            <div
+                                class="info-value"
+                                id="law1"
+                            ></div>
+
+                        </div>
+
+
+                        <div class="info">
+
+                            <div class="info-title">
+                                POSSIBLE PUNISHMENT
+                            </div>
+
+                            <div
+                                class="info-value"
+                                id="punishment1"
+                            ></div>
+
+                        </div>
+
+
+                        <div class="info">
+
+                            <div class="info-title">
+                                FINE
+                            </div>
+
+                            <div
+                                class="info-value"
+                                id="fine1"
+                            ></div>
+
+                        </div>
+
+
+                        <div class="info">
+
+                            <div class="info-title">
+                                NOTES
+                            </div>
+
+                            <div
+                                class="info-value"
+                                id="notes1"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- COUNTRY 2 -->
+
+                <div class="country">
+
+                    <div
+                        class="country-name"
+                        id="name2"
+                    >
+                        UNITED STATES
+                    </div>
+
+                    <div class="country-content">
+
+                        <div class="info">
+
+                            <div class="info-title">
+                                APPLICABLE LAW
+                            </div>
+
+                            <div
+                                class="info-value"
+                                id="law2"
+                            ></div>
+
+                        </div>
+
+
+                        <div class="info">
+
+                            <div class="info-title">
+                                POSSIBLE PUNISHMENT
+                            </div>
+
+                            <div
+                                class="info-value"
+                                id="punishment2"
+                            ></div>
+
+                        </div>
+
+
+                        <div class="info">
+
+                            <div class="info-title">
+                                FINE
+                            </div>
+
+                            <div
+                                class="info-value"
+                                id="fine2"
+                            ></div>
+
+                        </div>
+
+
+                        <div class="info">
+
+                            <div class="info-title">
+                                NOTES
+                            </div>
+
+                            <div
+                                class="info-value"
+                                id="notes2"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- COUNTRY 3 -->
+
+                <div class="country">
+
+                    <div
+                        class="country-name"
+                        id="name3"
+                    >
+                        JAPAN
+                    </div>
+
+                    <div class="country-content">
+
+                        <div class="info">
+
+                            <div class="info-title">
+                                APPLICABLE LAW
+                            </div>
+
+                            <div
+                                class="info-value"
+                                id="law3"
+                            ></div>
+
+                        </div>
+
+
+                        <div class="info">
+
+                            <div class="info-title">
+                                POSSIBLE PUNISHMENT
+                            </div>
+
+                            <div
+                                class="info-value"
+                                id="punishment3"
+                            ></div>
+
+                        </div>
+
+
+                        <div class="info">
+
+                            <div class="info-title">
+                                FINE
+                            </div>
+
+                            <div
+                                class="info-value"
+                                id="fine3"
+                            ></div>
+
+                        </div>
+
+
+                        <div class="info">
+
+                            <div class="info-title">
+                                NOTES
+                            </div>
+
+                            <div
+                                class="info-value"
+                                id="notes3"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ================= AI ANALYSIS ================= -->
+
+            <div class="ai-analysis">
+
+                <div class="analysis-title">
+                    AI CASE ANALYSIS
+                </div>
+
+                <div class="analysis-content" id="analysis">
+    <div class="analysis-placeholder">
+        Select an offence and run the comparison
+        to generate an analysis.
+    </div>
+
+
+            </div>
+
+
+            <!-- DISCLAIMER -->
+
+            <div class="disclaimer">
+
+                IMPORTANT: Criminal penalties depend on
+                the exact offence, circumstances,
+                jurisdiction and applicable law.
+
+                This website provides informational
+                comparisons and should not be treated
+                as legal advice.
+
+                Always verify information against
+                current official legal sources.
+
+            </div>
+
+        </section>
+
+
+        <footer>
+
+            PENALTY//COMPARE — AI LEGAL RESEARCH PROJECT
+
+        </footer>
+
+    </main>
+
+</div>
+
+
+<script>
+
+    /*
+       DEMO DATA
+
+       These are placeholders for the prototype.
+       Later, we can connect an AI + legal sources.
+    */
+
+    const data = {
+
+        theft: {
+
+    india: {
+        law: "Bharatiya Nyaya Sanhita, 2023 — Section 303",
+        punishment: "Up to 3 years imprisonment, or fine, or both. Repeat convictions can carry 1–5 years rigorous imprisonment and fine.",
+        fine: "Fine may apply; exact amount depends on the applicable provision and case.",
+        notes: "For a first conviction involving property worth less than ₹5,000, restoration of the property/value can lead to community service under Section 303(2)."
+    },
+
+    usa: {
+        law: "Theft/larceny law generally depends on the state and the specific circumstances.",
+        punishment: "Penalty varies by state, value of property and circumstances.",
+        fine: "May include a monetary fine depending on the applicable state or federal law.",
+        notes: "A specific U.S. state must be identified for a precise theft-law comparison."
+    },
+
+    uk: {
+        law: "Theft Act 1968 — Section 1",
+        punishment: "Theft is an offence where a person dishonestly appropriates property belonging to another with intent to permanently deprive them of it.",
+        fine: "Sentencing depends on the circumstances and applicable sentencing rules.",
+        notes: "The Theft Act 1968 applies to England and Wales; the precise sentence depends on the case."
+    },
+
+    japan: {
+        law: "Japanese Penal Code — Article 235",
+        punishment: "Imprisonment for not more than 10 years, or a fine of not more than ¥500,000.",
+        fine: "Maximum fine: ¥500,000.",
+        notes: "Article 235 defines and punishes theft. Other circumstances can lead to different offences or provisions."
+    }
+
+},
+
+
+        assault: {
+
+            india: {
+                law: "Applicable Indian criminal law depends on the nature of the assault.",
+                punishment: "Depends on the circumstances and applicable offence.",
+                fine: "May apply.",
+                notes: "Severity of injury and circumstances can affect the applicable provision."
+            },
+
+            usa: {
+                law: "Assault laws vary between U.S. states.",
+                punishment: "Can range from misdemeanour to felony penalties.",
+                fine: "May apply depending on jurisdiction.",
+                notes: "State law is required for an exact result."
+            },
+
+            uk: {
+                law: "Different assault offences have different sentencing ranges.",
+                punishment: "Depends on the type and seriousness of the offence.",
+                fine: "May apply.",
+                notes: "Exact offence classification is important."
+            },
+
+            japan: {
+                law: "Japanese criminal law contains provisions covering bodily injury and violence.",
+                punishment: "Depends on the circumstances.",
+                fine: "May apply.",
+                notes: "Exact offence and circumstances must be established."
+            }
+        },
+
+
+        fraud: {
+
+            india: {
+                law: "Applicable Indian criminal provisions depend on the type of fraud.",
+                punishment: "Depends on the specific offence and circumstances.",
+                fine: "May apply.",
+                notes: "Financial amount and method may affect the applicable law."
+            },
+
+            usa: {
+                law: "Fraud offences vary under federal and state law.",
+                punishment: "Depends on the specific offence and jurisdiction.",
+                fine: "Financial penalties may apply.",
+                notes: "Federal or state jurisdiction can change the applicable law."
+            },
+
+            uk: {
+                law: "Fraud Act 2006 may apply to relevant fraud offences.",
+                punishment: "Depends on the offence and circumstances.",
+                fine: "May apply.",
+                notes: "Exact offence classification matters."
+            },
+
+            japan: {
+                law: "Japanese criminal law contains provisions relating to fraud.",
+                punishment: "Depends on the specific circumstances.",
+                fine: "May apply.",
+                notes: "Current legislation should be checked for an exact answer."
+            }
+        },
+
+
+        cybercrime: {
+
+            india: {
+                law: "Information Technology Act and other applicable criminal laws may apply.",
+                punishment: "Depends on the specific cyber offence.",
+                fine: "May apply depending on the provision.",
+                notes: "The exact digital activity must be identified."
+            },
+
+            usa: {
+                law: "Federal and state cybercrime laws may apply.",
+                punishment: "Depends on the offence and jurisdiction.",
+                fine: "May apply.",
+                notes: "Federal versus state jurisdiction can affect the result."
+            },
+
+            uk: {
+                law: "Computer Misuse Act 1990 and other laws may apply.",
+                punishment: "Depends on the specific offence.",
+                fine: "May apply.",
+                notes: "The exact computer-related conduct is important."
+            },
+
+            japan: {
+                law: "Japanese laws covering unauthorized computer access and related conduct may apply.",
+                punishment: "Depends on the specific offence.",
+                fine: "May apply.",
+                notes: "Exact conduct must be identified."
+            }
+        }
+    };
+
+
+    const countryNames = {
+
+        india: "INDIA",
+
+        usa: "UNITED STATES",
+
+        uk: "UNITED KINGDOM",
+
+        japan: "JAPAN"
+
+    };
+
+
+    function compareCrime() {
+
+    const crime = document.getElementById("crime").value;
+    const country1 = document.getElementById("country1").value;
+    const country2 = document.getElementById("country2").value;
+    const country3 = document.getElementById("country3").value;
+    const details = document.getElementById("details").value;
+    const circumstances = Array.from(
+        document.querySelectorAll(".circumstances input:checked")
+    ).map(
+        checkbox => checkbox.value
+    );
+
+
+    
+    // Show analysis status
+
+document.getElementById("status").innerText =
+    "ANALYZING CASE...";
+
+document.getElementById("results").style.display =
+    "none";
+
+document.getElementById("analysis").innerHTML = `
+    <div class="analysis-loading">
+        ● AI IS ANALYSING THE CASE...
+    </div>
+`;
+
+
+    setTimeout(() => {
+
+        // Get local legal comparison data
+        const result1 = data[crime]?.[country1] || {
+            law: "No local data available.",
+            punishment: "Requires further legal research.",
+            fine: "Requires further legal research.",
+            notes: "Check the current official legal source."
+        };
+
+        const result2 = data[crime]?.[country2] || {
+            law: "No local data available.",
+            punishment: "Requires further legal research.",
+            fine: "Requires further legal research.",
+            notes: "Check the current official legal source."
+        };
+
+        const result3 = data[crime]?.[country3] || {
+            law: "No local data available.",
+            punishment: "Requires further legal research.",
+            fine: "Requires further legal research.",
+            notes: "Check the current official legal source."
+        };
+
+
+        // Offence
+        document.getElementById("resultCrime").innerText =
+            crime.toUpperCase();
+
+
+        // Country names
+        document.getElementById("name1").innerText =
+            countryNames[country1];
+
+        document.getElementById("name2").innerText =
+            countryNames[country2];
+
+        document.getElementById("name3").innerText =
+            countryNames[country3];
+
+
+        // INDIA / COUNTRY 1
+        document.getElementById("law1").innerText =
+            result1.law;
+
+        document.getElementById("punishment1").innerText =
+            result1.punishment;
+
+        document.getElementById("fine1").innerText =
+            result1.fine;
+
+        document.getElementById("notes1").innerText =
+            result1.notes;
+
+
+        // COUNTRY 2
+        document.getElementById("law2").innerText =
+            result2.law;
+
+        document.getElementById("punishment2").innerText =
+            result2.punishment;
+
+        document.getElementById("fine2").innerText =
+            result2.fine;
+
+        document.getElementById("notes2").innerText =
+            result2.notes;
+
+
+        // COUNTRY 3
+        document.getElementById("law3").innerText =
+            result3.law;
+
+        document.getElementById("punishment3").innerText =
+            result3.punishment;
+
+        document.getElementById("fine3").innerText =
+            result3.fine;
+
+        document.getElementById("notes3").innerText =
+            result3.notes;
+
+
+        // Generate local AI-style analysis
+        let analysisText =
+    "CASE ANALYSIS\n\n" +
+    "OFFENCE: " + crime.toUpperCase() + "\n\n" +
+    "JURISDICTIONS COMPARED:\n" +
+    countryNames[country1] + ", " +
+    countryNames[country2] + " and " +
+    countryNames[country3] + "\n\n";
+
+if (details.trim() !== "") {
+    analysisText +=
+        "CASE DETAILS:\n" +
+        details +
+        "\n\n";
+}
+
+if (circumstances.length > 0) {
+
+    analysisText +=
+        "CASE CIRCUMSTANCES:\n" +
+        circumstances.join("\n") +
+        "\n\n";
+
+    if (circumstances.includes("First offence")) {
+        analysisText +=
+            "FIRST OFFENCE:\n" +
+            "The fact that this is a first offence may be relevant " +
+            "when considering applicable sentencing rules.\n\n";
+    }
+
+    if (circumstances.includes("Repeat offence")) {
+        analysisText +=
+            "REPEAT OFFENCE:\n" +
+            "Previous convictions may affect the applicable offence " +
+            "or sentencing provisions in some jurisdictions.\n\n";
+    }
+
+    if (circumstances.includes("Violence involved")) {
+        analysisText +=
+            "VIOLENCE:\n" +
+            "Violence may change the legal classification of the conduct " +
+            "or introduce additional offences depending on the jurisdiction.\n\n";
+    }
+
+    if (circumstances.includes("Weapon involved")) {
+        analysisText +=
+            "WEAPON:\n" +
+            "Weapon involvement may affect the applicable criminal provisions " +
+            "or sentencing rules.\n\n";
+    }
+
+    if (circumstances.includes("Financial loss")) {
+        analysisText +=
+            "FINANCIAL LOSS:\n" +
+            "The value or amount of loss can be relevant to offence classification " +
+            "or sentencing under some legal systems.\n\n";
+    }
+
+    if (circumstances.includes("Minor involved")) {
+        analysisText +=
+            "MINOR INVOLVED:\n" +
+            "Where a minor is involved, age-specific criminal-law provisions " +
+            "or enhanced protections may apply.\n\n";
+    }
+
+} else {
+
+    analysisText +=
+        "CASE CIRCUMSTANCES:\n" +
+        "No additional circumstances selected.\n\n";
+}
+
+analysisText +=
+    "IMPORTANT:\n" +
+    "This is a local comparison tool, not a legal decision-making system. " +
+    "The exact offence and penalty depend on the jurisdiction, applicable law, " +
+    "case facts and current legislation.\n\n" +
+    "ANALYSIS STATUS: LOCAL DATABASE\n" +
+    "SOURCE STATUS: OFFICIAL SOURCES SHOULD BE VERIFIED";
+
+    document.getElementById("analysis").innerText = analysisText;
+
+
+        // Show results
+        document.getElementById("results").style.display =
+            "block";
+
+
+        document.getElementById("status").innerText =
+            "COMPARISON COMPLETE";
+
+
+        document.getElementById("results").scrollIntoView({
+            behavior: "smooth"
+        });
+
+
+    }, 1200);
+
+}
+// ===============================
+// SEARCH FUNCTION
+// ===============================
+
+const searchInput = document.getElementById("siteSearch");
+const searchResults = document.getElementById("searchResults");
+
+
+// Searchable items
+
+const searchItems = [
+
+    // Crimes
+    {
+        name: "Theft",
+        type: "Crime",
+        action: () => selectCrime("theft")
+    },
+
+    {
+        name: "Assault",
+        type: "Crime",
+        action: () => selectCrime("assault")
+    },
+
+    {
+        name: "Fraud",
+        type: "Crime",
+        action: () => selectCrime("fraud")
+    },
+
+    {
+        name: "Cybercrime",
+        type: "Crime",
+        action: () => selectCrime("cybercrime")
+    },
+
+    {
+        name: "Robbery",
+        type: "Crime",
+        action: () => selectCrime("robbery")
+    },
+
+    {
+        name: "Burglary",
+        type: "Crime",
+        action: () => selectCrime("burglary")
+    },
+
+    {
+        name: "Drug Offence",
+        type: "Crime",
+        action: () => selectCrime("drug_offence")
+    },
+
+    {
+        name: "Vandalism",
+        type: "Crime",
+        action: () => selectCrime("vandalism")
+    },
+
+
+    // Countries
+
+    {
+        name: "India",
+        type: "Country",
+        action: () => selectCountry("india")
+    },
+
+    {
+        name: "United States",
+        type: "Country",
+        action: () => selectCountry("usa")
+    },
+
+    {
+        name: "United Kingdom",
+        type: "Country",
+        action: () => selectCountry("uk")
+    },
+
+    {
+        name: "Japan",
+        type: "Country",
+        action: () => selectCountry("japan")
+    },
+
+
+    // Sections
+
+    {
+        name: "Comparison Results",
+        type: "Section",
+        action: () => {
+            document
+                .getElementById("results")
+                .scrollIntoView({
+                    behavior: "smooth"
+                });
+        }
+    },
+
+    {
+        name: "Legal Sources",
+        type: "Section",
+        action: () => {
+            document
+                .getElementById("sources")
+                .scrollIntoView({
+                    behavior: "smooth"
+                });
+        }
+    },
+
+    {
+        name: "Case Information",
+        type: "Section",
+        action: () => {
+            document
+                .getElementById("compare")
+                .scrollIntoView({
+                    behavior: "smooth"
+                });
+        }
+    }
+
+];
+
+
+// ===============================
+// SEARCH INPUT
+// ===============================
+
+searchInput.addEventListener("input", function () {
+
+    const query =
+        this.value.trim().toLowerCase();
+
+    searchResults.innerHTML = "";
+
+    if (query === "") {
+
+        searchResults.style.display = "none";
+
+        return;
+    }
+
+
+    const matches =
+        searchItems.filter(item =>
+            item.name
+                .toLowerCase()
+                .includes(query)
+        );
+
+
+    if (matches.length === 0) {
+
+        searchResults.innerHTML = `
+            <div class="search-result">
+                No matching result
+                <span class="search-type">
+                    Try a crime, country or section
+                </span>
+            </div>
+        `;
+
+        searchResults.style.display = "block";
+
+        return;
+    }
+
+
+    matches.slice(0, 6).forEach(item => {
+
+        const result =
+            document.createElement("div");
+
+        result.className = "search-result";
+
+        result.innerHTML = `
+            ${item.name}
+            <span class="search-type">
+                ${item.type}
+            </span>
+        `;
+
+
+        result.addEventListener("click", () => {
+
+            item.action();
+
+            searchInput.value = "";
+
+            searchResults.style.display = "none";
+
+        });
+
+
+        searchResults.appendChild(result);
+
+    });
+
+
+    searchResults.style.display = "block";
+
+});
+
+
+// ===============================
+// ENTER KEY
+// ===============================
+
+searchInput.addEventListener("keydown", function(event) {
+
+    if (event.key !== "Enter") {
+        return;
+    }
+
+    const query =
+        this.value.trim().toLowerCase();
+
+    const match =
+        searchItems.find(item =>
+            item.name.toLowerCase() === query
+        );
+
+
+    if (match) {
+
+        match.action();
+
+        searchInput.value = "";
+
+        searchResults.style.display = "none";
+
+    }
+
+});
+
+
+// ===============================
+// SELECT CRIME
+// ===============================
+
+function selectCrime(crime) {
+
+    const crimeSelect =
+        document.getElementById("crime");
+
+    crimeSelect.value = crime;
+
+    document
+        .getElementById("compare")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+}
+
+
+// ===============================
+// SELECT COUNTRY
+// ===============================
+
+function selectCountry(country) {
+
+    const country1 =
+        document.getElementById("country1");
+
+    const country2 =
+        document.getElementById("country2");
+
+    const country3 =
+        document.getElementById("country3");
+
+
+    // Put the country into the first
+    // available country selector
+
+    if (!country1.value) {
+
+        country1.value = country;
+
+    } else if (!country2.value) {
+
+        country2.value = country;
+
+    } else {
+
+        country3.value = country;
+
+    }
+
+
+    document
+        .getElementById("compare")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+}
+
+
+// ===============================
+// CLOSE SEARCH WHEN CLICKING OUTSIDE
+// ===============================
+
+document.addEventListener("click", function(event) {
+
+    if (
+        !event.target.closest(".search-container")
+    ) {
+
+        searchResults.style.display = "none";
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
